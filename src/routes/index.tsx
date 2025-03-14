@@ -2,10 +2,11 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { lazy, Suspense } from "react";
 import LoadingPage from "@src/pages/Loading/loading-page";
 
-const Dashboard = lazy(() => import('@src/pages/Dashboard/dashboard'))
-const SignIn = lazy(() => import('@src/pages/Auth/sign-in'))
-const SignUp = lazy(() => import('@src/pages/Auth/sign-up'))
+const Dashboard = lazy(() => import('@src/pages/dashboard/dashboard'))
+const SignIn = lazy(() => import('@src/pages/auth/sign-in'))
+const SignUp = lazy(() => import('@src/pages/auth/sign-up'))
 const PageNotFound = lazy(() => import('@src/pages/404/page-not-found'))
+const DashboardLayout = lazy(() => import('@src/layouts/dashboard-layout'))
 
 const withSuspense = (Component: React.FC) => {
   return () => (
@@ -18,7 +19,10 @@ const withSuspense = (Component: React.FC) => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: withSuspense(Dashboard)()
+    element: withSuspense(DashboardLayout)(),
+    children: [
+      { path: "", element: <Dashboard /> }
+    ]
   },
   {
     path: '/sign-in',

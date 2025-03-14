@@ -1,7 +1,14 @@
+import { Button } from "@chakra-ui/react"
+import { useColorMode } from "@components/ui/color-mode"
+
 export default function Dashboard() {
+  const { toggleColorMode } = useColorMode()
+
   return (
     <div>
-      <h1>Dashboard</h1>
+      <Button variant="outline" onClick={toggleColorMode}>
+        Toggle Mode
+      </Button>
     </div>
   )
 }
